@@ -34,4 +34,22 @@
         <artifactId>extension3</artifactId>
         <version>0.9.10</version>
     </extension>
+    <!-- mvn-lens: JFR-based build profiler. It writes target/mvnlens/report.html - a single
+         self-contained HTML dashboard with the build timeline, GC, JIT and the slowest tests -
+         at the end of every session, a failed one included. https://github.com/mvn-perf/mvn-lens
+
+         Only SNAPSHOTs are published so far, to the Maven Central snapshot repository. Maven
+         resolves the extensions declared here before it reads any pom.xml, from the repositories
+         known to settings.xml alone, so that repository cannot be declared in a pom.xml for this
+         artifact: the CI builds get it from the mvn-lens profile of .github/mvn-settings.xml (and
+         of .github/release-settings.xml), restricted to the io.github.mvn-perf groupId by
+         .mvn/rrf/groupId-mvn-lens-snapshots.txt. Local builds need it declared once in
+         ~/.m2/settings.xml - see the "Build" section of CONTRIBUTING.md.
+
+         Pass -Dmvnlens.disabled=true to switch the profiler off for a single invocation. -->
+    <extension>
+        <groupId>io.github.mvn-perf</groupId>
+        <artifactId>mvn-lens-extension</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </extension>
 </extensions>

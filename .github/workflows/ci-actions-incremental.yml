@@ -411,6 +411,18 @@ jobs:
           CAPTURE_BUILD_SCAN: true
         run: |
           ./mvnw -T1C $COMMON_MAVEN_ARGS -Dscalpel.enabled=false -DskipTests -DskipITs -DskipDocs -Dinvoker.skip -Dskip.gradle.tests -Djbang.skip -Dtruststore.skip -Dno-format -Dtcks -Prelocations clean install
+      - name: Archive the mvn-lens build report
+        # mvn-lens writes target/mvnlens/report.html - a self-contained HTML dashboard of the
+        # build timeline, GC, JIT and slowest tests - when the Maven session ends, a failed one
+        # included, which is exactly the build worth looking at: hence always(). It is archived
+        # right after the build it profiles rather than at the end of the job, because every later
+        # Maven invocation of the job overwrites the report with one of its own.
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: "mvn-lens-${{ github.run_attempt }}-Initial JDK ${{ needs.configure.outputs.base-jdk-version }} Build"
+          path: target/mvnlens/report.html
+          retention-days: 7
       - name: Verify extension dependencies
         run: ./update-extension-dependencies.sh $COMMON_MAVEN_ARGS
       - name: Configure Scalpel
@@ -707,6 +719,16 @@ jobs:
           # IMPORTANT: we cannot simply replace all spaces with new lines as we have a module with spaces in the name (to test spaces are supported)
           echo -e "$MATRIX_JAVA_MODULES" >> .mvn/maven.config
           ./mvnw $COMMON_MAVEN_ARGS $COMMON_TEST_MAVEN_ARGS $PTS_MAVEN_ARGS clean install -Dsurefire.timeout=1200 -Dno-test-kubernetes ${{ matrix.java.maven_args }}
+      - name: Archive the mvn-lens report
+        # Right after the build it profiles: a later Maven invocation would overwrite the report.
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: "mvn-lens-${{ github.run_attempt }}-${{ matrix.java.name }}"
+          path: |
+            target/mvnlens/report.html
+            integration-tests/target/mvnlens/report.html
+          retention-days: 7
       - name: Clean Gradle temp directory
         if: always()
         run: devtools/gradle/gradlew --stop && rm -rf devtools/gradle/gradle-extension-plugin/build/tmp
@@ -847,6 +869,14 @@ jobs:
         # Important: keep -pl ... in sync with "Calculate run flags"!
         # Despite the pre-calculated run_maven flag, Scalpel has to be re-run here to figure out the exact submodules to build.
         run: ./mvnw $COMMON_MAVEN_ARGS $COMMON_TEST_MAVEN_ARGS $PTS_MAVEN_ARGS $JVM_TEST_MAVEN_ARGS clean install -pl 'integration-tests/maven' -pl 'integration-tests/devmode' ${{ needs.initial-build.outputs.scalpel_args }}
+      - name: Archive the mvn-lens report
+        # Right after the build it profiles: a later Maven invocation would overwrite the report.
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: "mvn-lens-${{ github.run_attempt }}-Maven Tests - JDK ${{matrix.java.name}}"
+          path: target/mvnlens/report.html
+          retention-days: 7
       - name: Prepare failure archive (if maven failed)
         if: failure()
         run: find . -name '*-reports' -type d -o -name '*.log' | tar -czf test-reports.tgz -T -
@@ -960,6 +990,14 @@ jobs:
           CAPTURE_BUILD_SCAN: true
         # Important: keep -pl ... in sync with "Calculate run flags"!
         run: ./mvnw $COMMON_MAVEN_ARGS $COMMON_TEST_MAVEN_ARGS $PTS_MAVEN_ARGS $JVM_TEST_MAVEN_ARGS clean install -pl integration-tests/gradle
+      - name: Archive the mvn-lens report
+        # Right after the build it profiles: a later Maven invocation would overwrite the report.
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: "mvn-lens-${{ github.run_attempt }}-Gradle Tests - JDK ${{matrix.java.name}}"
+          path: target/mvnlens/report.html
+          retention-days: 7
       - name: Prepare build reports archive
         if: always()
         run: |
@@ -1060,6 +1098,14 @@ jobs:
           CAPTURE_BUILD_SCAN: true
         # Important: keep -pl ... in sync with "Calculate run flags"!
         run: ./mvnw $COMMON_MAVEN_ARGS $COMMON_TEST_MAVEN_ARGS $PTS_MAVEN_ARGS $JVM_TEST_MAVEN_ARGS clean install -pl 'integration-tests/devtools'
+      - name: Archive the mvn-lens report
+        # Right after the build it profiles: a later Maven invocation would overwrite the report.
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: "mvn-lens-${{ github.run_attempt }}-Devtools Tests - JDK ${{matrix.java.name}}"
+          path: target/mvnlens/report.html
+          retention-days: 7
       - name: Prepare failure archive (if maven failed)
         if: failure()
         run: find . -name '*-reports' -type d -o -name '*.log' | tar -czf test-reports.tgz -T -
@@ -1161,6 +1207,14 @@ jobs:
           CAPTURE_BUILD_SCAN: true
         # Important: keep -pl ... in sync with "Calculate run flags"!
         run: ./mvnw $COMMON_MAVEN_ARGS $COMMON_TEST_MAVEN_ARGS $PTS_MAVEN_ARGS $JVM_TEST_MAVEN_ARGS clean install -f 'integration-tests/kubernetes'
+      - name: Archive the mvn-lens report
+        # Right after the build it profiles: a later Maven invocation would overwrite the report.
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: "mvn-lens-${{ github.run_attempt }}-Kubernetes Tests - JDK ${{matrix.java.name}}"
+          path: integration-tests/kubernetes/target/mvnlens/report.html
+          retention-days: 7
       - name: Prepare failure archive (if maven failed)
         if: failure()
         run: find . -name '*-reports' -type d -o -name '*.log' | tar -czf test-reports.tgz -T -
@@ -1263,7 +1317,11 @@ jobs:
       - name: Get Quarkus version
         id: get-quarkus-version
         run: |
-          echo "quarkus-version=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
+          # --settings: first Maven invocation of the job, and the mvn-lens core extension
+          # declared in .mvn/extensions.xml resolves from the repositories it declares.
+          # -Dmvnlens.disabled=true: mvn-lens prints its report path on stdout at session
+          # end, which -DforceStdout would capture along with the version.
+          echo "quarkus-version=$(./mvnw --settings .github/mvn-settings.xml -Dmvnlens.disabled=true help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
       - name: Clone Quickstarts
         env:
           QUICKSTARTS_BRANCH: ${{ steps.get-quickstarts-branch.outputs.result }}
@@ -1379,7 +1437,11 @@ jobs:
       - name: Get Quarkus version
         id: get-quarkus-version
         run: |
-          echo "quarkus-version=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
+          # --settings: first Maven invocation of the job, and the mvn-lens core extension
+          # declared in .mvn/extensions.xml resolves from the repositories it declares.
+          # -Dmvnlens.disabled=true: mvn-lens prints its report path on stdout at session
+          # end, which -DforceStdout would capture along with the version.
+          echo "quarkus-version=$(./mvnw --settings .github/mvn-settings.xml -Dmvnlens.disabled=true help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
       - name: Test Platform
         env:
           CAPTURE_BUILD_SCAN: true
@@ -1467,6 +1529,14 @@ jobs:
           CAPTURE_BUILD_SCAN: true
         run: |
           export LANG=en_US && ./mvnw $COMMON_MAVEN_ARGS $COMMON_TEST_MAVEN_ARGS $PTS_MAVEN_ARGS -f integration-tests -pl "$TEST_MODULES" $NATIVE_TEST_MAVEN_ARGS -Dextra-args=--enable-preview -Dquarkus.native.container-build=true
+      - name: Archive the mvn-lens report
+        # Right after the build it profiles: a later Maven invocation would overwrite the report.
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: "mvn-lens-${{ github.run_attempt }}-Native Tests - Virtual Thread - ${{matrix.category}}"
+          path: integration-tests/target/mvnlens/report.html
+          retention-days: 7
       - name: Prepare build reports archive
         if: always()
         run: |
@@ -1543,6 +1613,14 @@ jobs:
         # Important: keep -pl ... in sync with "Calculate run flags"!
         # Despite the pre-calculated run_tcks flag, Scalpel has to be re-run here to figure out the exact tcks submodules to build.
         run: ./mvnw $COMMON_MAVEN_ARGS $COMMON_TEST_MAVEN_ARGS $PTS_MAVEN_ARGS -Dtcks -pl tcks -amd clean install ${{ needs.initial-build.outputs.scalpel_args }}
+      - name: Archive the mvn-lens report
+        # Right after the build it profiles: a later Maven invocation would overwrite the report.
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: "mvn-lens-${{ github.run_attempt }}-MicroProfile TCKs Tests"
+          path: target/mvnlens/report.html
+          retention-days: 7
       - name: Verify resteasy-reative dependencies
         # note: ideally, this would be run _before_ mvnw but that would required building tcks/resteasy-reactive in two steps
         run: ./tcks/resteasy-reactive/update-dependencies.sh $COMMON_MAVEN_ARGS
@@ -1680,6 +1758,14 @@ jobs:
           CONTAINER_BUILD: ${{startsWith(matrix.os-name, 'windows') && 'false' || 'true'}}
           CAPTURE_BUILD_SCAN: true
         run: ./mvnw $COMMON_MAVEN_ARGS $COMMON_TEST_MAVEN_ARGS $PTS_MAVEN_ARGS -f integration-tests -pl "$TEST_MODULES" $NATIVE_TEST_MAVEN_ARGS -Dquarkus.native.container-build=$CONTAINER_BUILD
+      - name: Archive the mvn-lens report
+        # Right after the build it profiles: a later Maven invocation would overwrite the report.
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: "mvn-lens-${{ github.run_attempt }}-Native Tests - ${{matrix.category}}"
+          path: integration-tests/target/mvnlens/report.html
+          retention-days: 7
       - name: Prepare failure archive (if maven failed)
         if: failure()
         run: find . -type d -name '*-reports' -o -wholename '*/build/reports/tests/functionalTest' -o -name '*.log' | tar -czf test-reports.tgz -T -
@@ -1862,6 +1948,14 @@ jobs:
             -Doracle.db-version=${{matrix.db-version}} \
             -f integration-tests -pl "$TEST_MODULES" \
             clean install
+      - name: Archive the mvn-lens report
+        # Right after the build it profiles: a later Maven invocation would overwrite the report.
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: "mvn-lens-${{ github.run_attempt }}-Oracle Test Pilot ${{matrix.category}} - JDK ${{matrix.java-version}}"
+          path: integration-tests/target/mvnlens/report.html
+          retention-days: 7
       - name: Delete Oracle Test Pilot Database
         id: delete_database
         if: always() && steps.create_database.outcome == 'success'
@@ -1984,6 +2078,14 @@ jobs:
             -Doracle.db-version=${{matrix.db-version}} \
             $NATIVE_TEST_MAVEN_ARGS -Dquarkus.native.container-build=false -Dquarkus.native.native-image-xmx=16g \
             -f integration-tests -pl "$TEST_MODULES"
+      - name: Archive the mvn-lens report
+        # Right after the build it profiles: a later Maven invocation would overwrite the report.
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: "mvn-lens-${{ github.run_attempt }}-Oracle Test Pilot ${{matrix.category}} - Native"
+          path: integration-tests/target/mvnlens/report.html
+          retention-days: 7
       - name: Delete Oracle Test Pilot Database
         id: delete_database
         if: always() && steps.create_database.outcome == 'success'
@@ -2053,6 +2155,16 @@ jobs:
       - name: Run PQC tests resteasy-reactive
         run: |
           ./mvnw $COMMON_MAVEN_ARGS $COMMON_TEST_MAVEN_ARGS $JVM_TEST_MAVEN_ARGS -Dmaven.repo.local=$HOME/.m2/repository -Dtest=PqcKeyExchangeTest -f extensions/resteasy-reactive/rest-client/deployment test
+      - name: Archive the mvn-lens reports
+        # Right after the build it profiles: a later Maven invocation would overwrite the report.
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: "mvn-lens-${{ github.run_attempt }}-PQC Tests"
+          path: |
+            extensions/vertx-http/deployment/target/mvnlens/report.html
+            extensions/resteasy-reactive/rest-client/deployment/target/mvnlens/report.html
+          retention-days: 7
       - name: Prepare failure archive (if maven failed)
         if: failure()
         run: find . -name '*-reports' -type d -o -name '*.log' | tar -czf test-reports.tgz -T -
