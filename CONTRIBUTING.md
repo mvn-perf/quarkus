@@ -413,6 +413,44 @@ This build skipped all the tests, native-image builds, documentation generation 
 goals `clean install` by default. For more details about `-Dquickly` have a look at the `quick-build` profile
 in `quarkus-parent` (root `pom.xml`).
 
+Every Maven invocation loads [mvn-lens](https://github.com/mvn-perf/mvn-lens), a JFR-based build profiler
+declared as a core extension in `.mvn/extensions.xml`. At the end of each session - a failed one included -
+it writes `target/mvnlens/report.html`, a self-contained HTML dashboard of the build: timeline, GC, JIT and
+slowest tests. CI archives it as the `mvn-lens-*` artifact of each job. Pass `-Dmvnlens.disabled=true` to
+switch the profiler off for a single invocation.
+
+mvn-lens is only published as a SNAPSHOT so far. Maven resolves core extensions before it reads any
+`pom.xml`, from the repositories contributed by an active profile of `settings.xml` alone, so the build
+cannot even start until the Maven Central snapshot repository is declared in your `~/.m2/settings.xml`
+(the CI builds get it from `.github/mvn-settings.xml` instead):
+
+```xml
+<profiles>
+  <profile>
+    <id>mvn-lens</id>
+    <repositories>
+      <repository>
+        <id>mvn-lens-snapshots</id>
+        <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+        <releases><enabled>false</enabled></releases>
+        <snapshots><enabled>true</enabled></snapshots>
+      </repository>
+    </repositories>
+    <pluginRepositories>
+      <pluginRepository>
+        <id>mvn-lens-snapshots</id>
+        <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+        <releases><enabled>false</enabled></releases>
+        <snapshots><enabled>true</enabled></snapshots>
+      </pluginRepository>
+    </pluginRepositories>
+  </profile>
+</profiles>
+<activeProfiles>
+  <activeProfile>mvn-lens</activeProfile>
+</activeProfiles>
+```
+
 When contributing to Quarkus, it is recommended to respect the following rules.
 
 > **Note:** The `impsort-maven-plugin` uses the `.cache` directory on each module to speed up the build.

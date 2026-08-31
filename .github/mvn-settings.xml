@@ -69,8 +69,47 @@
         </pluginRepository>
       </pluginRepositories>
     </profile>
+    <!-- mvn-lens is published as a SNAPSHOT only, to the Maven Central snapshot repository.
+         It is declared in .mvn/extensions.xml as a Maven core extension, and Maven resolves core
+         extensions before it reads any pom.xml, from the repositories known to settings.xml alone
+         (only those contributed by an <activeProfile>) - hence this profile.
+         The repository is restricted to the io.github.mvn-perf groupId by
+         .mvn/rrf/groupId-mvn-lens-snapshots.txt so that it can never serve any other artifact,
+         and in particular never shadow a locally built Quarkus 999-SNAPSHOT. -->
+    <profile>
+      <id>mvn-lens</id>
+      <repositories>
+        <repository>
+          <id>mvn-lens-snapshots</id>
+          <name>Maven Central snapshots (mvn-lens only)</name>
+          <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>daily</updatePolicy>
+          </snapshots>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>mvn-lens-snapshots</id>
+          <name>Maven Central snapshots (mvn-lens only)</name>
+          <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>daily</updatePolicy>
+          </snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
   </profiles>
   <activeProfiles>
     <activeProfile>google-mirror</activeProfile>
+    <activeProfile>mvn-lens</activeProfile>
   </activeProfiles>
 </settings>
