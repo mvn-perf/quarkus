@@ -1,0 +1,50 @@
+name: Build monitor
+
+# Independent processing that runs once a Quarkus CI run has completed: it collects the run's
+# jobs/steps and the mvn-lens reports published to the inbox branch by the build jobs, updates
+# the build history and publishes the monitoring page to the gh-pages branch
+# (Settings -> Pages -> Deploy from a branch: gh-pages / root).
+# https://github.com/mvn-perf/build-monitor
+#
+# ON A FORK, ENABLE THIS WORKFLOW ONCE. GitHub disables scheduled workflows in forked
+# repositories by default, and a workflow in that state runs on NO trigger at all -
+# workflow_run and workflow_dispatch included. Actions tab -> "Build monitor" ->
+# "Enable workflow", or:
+#   gh workflow enable build-monitor.yml -R <owner>/<repo>
+# Check the state with:
+#   gh api repos/<owner>/<repo>/actions/workflows/build-monitor.yml --jq .state
+# ("active" = runs, "disabled_fork"/"disabled_manually" = nothing runs).
+
+on:
+  workflow_run:
+    workflows: ['Quarkus CI']
+    types: [completed]
+  schedule:
+    - cron: '23 3 * * *'      # daily catch-up (runs missed while the queue was busy)
+  workflow_dispatch:
+    inputs:
+      run-id:
+        description: Run id(s) to (re)process (comma-separated); empty = sweep the latest runs
+        required: false
+        default: ''
+
+permissions:
+  actions: read        # runs, jobs
+  contents: write      # gh-pages + inbox refs
+  pages: write         # request the Pages build (GITHUB_TOKEN pushes do not trigger one)
+
+# One processor at a time; every completed CI run keeps its place in the queue.
+concurrency:
+  group: build-monitor
+  cancel-in-progress: false
+  queue: max
+
+jobs:
+  update:
+    name: Update the monitoring page
+    runs-on: ubuntu-latest
+    steps:
+      - uses: mvn-perf/build-monitor@main
+        with:
+          workflows: Quarkus CI
+          run-id: ${{ inputs.run-id || '' }}
