@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 33985896272,
+  "runNumber": 13,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "pqc-tests",
+  "jobId": 101362631097,
+  "jobName": "PQC Tests",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/33985896272/job/101362631097",
+  "runnerName": "GitHub Actions 1000001840",
+  "stepNumber": 10,
+  "stepName": "Run PQC tests Vertx-http",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101362631097-s10",
+  "collectedAt": "2026-09-05T19:41:11.319Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "extensions/vertx-http/deployment/target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-vertx-http-deployment",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "test"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "21.0.12.1",
+        "status": "OK",
+        "startedAt": 1788637195641,
+        "endedAt": 1788637268447,
+        "totalMs": 73184,
+        "wallMs": 72806,
+        "cpuMs": 37781,
+        "gcMs": 1412,
+        "gcCount": 121,
+        "jitMs": 30944,
+        "c2Ms": 30944,
+        "downloadMs": 696426,
+        "downloadBytes": 178077764,
+        "downloadCount": 1022,
+        "moduleCount": 1,
+        "slowestMojo": {
+          "plugin": "org.apache.maven.plugins:maven-surefire-plugin",
+          "goal": "test",
+          "phase": "test",
+          "executionId": "default-test",
+          "moduleKey": "io.quarkus:quarkus-vertx-http-deployment:999-SNAPSHOT",
+          "durationMs": 34346
+        },
+        "slowestTest": {
+          "className": "io.quarkus.vertx.http.tls.HybridKeyExchangeClientNegotiatedIllGroupsTest",
+          "methodName": "testPqcClientConnects",
+          "displayName": "testPqcClientConnects()",
+          "framework": "JUNIT5",
+          "durationMs": 503
+        },
+        "testCount": 10,
+        "testMs": 2556,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 16766414848,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 1635342
+    }
+  ]
+}
