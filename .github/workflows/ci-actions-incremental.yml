@@ -339,6 +339,10 @@ jobs:
       scalpel_args: ${{ steps.get-scalpel-config.outputs.scalpel_args }}
       scalpel_impacted: ${{ steps.get-scalpel-config.outputs.impacted_modules }}
       scalpel_impacted_gav: ${{ steps.get-scalpel-config.outputs.impacted_modules_gav }}
+    permissions:
+      contents: write   # build-monitor/report commits the mvn-lens report to the inbox branch
+      actions: read     # ... and identifies its own job/step through the Jobs API
+      packages: read    # (the workflow-level default, which a job-level block replaces)
     steps:
       - uses: runs-on/action@46910bf61b41721b0579f237e186afb35477007a # v2.3.0
       - name: Gradle Enterprise environment
@@ -347,6 +351,7 @@ jobs:
           echo "GE_CUSTOM_VALUES=gh-job-name=Initial JDK ${{ needs.configure.outputs.base-jdk-version }} Build" >> "$GITHUB_ENV"
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false   # keep the build-monitor write token out of .git/config
           # this is important for Scalpel to work
           fetch-depth: 0
       - name: Add quarkusio remote
@@ -411,18 +416,19 @@ jobs:
           CAPTURE_BUILD_SCAN: true
         run: |
           ./mvnw -T1C $COMMON_MAVEN_ARGS -Dscalpel.enabled=false -DskipTests -DskipITs -DskipDocs -Dinvoker.skip -Dskip.gradle.tests -Djbang.skip -Dtruststore.skip -Dno-format -Dtcks -Prelocations clean install
-      - name: Archive the mvn-lens build report
-        # mvn-lens writes target/mvnlens/report.html - a self-contained HTML dashboard of the
-        # build timeline, GC, JIT and slowest tests - when the Maven session ends, a failed one
-        # included, which is exactly the build worth looking at: hence always(). It is archived
-        # right after the build it profiles rather than at the end of the job, because every later
-        # Maven invocation of the job overwrites the report with one of its own.
-        if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      # mvn-lens writes target/mvnlens/report.html - a self-contained HTML dashboard of the
+      # build timeline, GC, JIT and slowest tests - when the Maven session ends, a failed one
+      # included, which is exactly the build worth looking at: hence !cancelled(). It is
+      # published right after the build it profiles rather than at the end of the job, because
+      # every later Maven invocation of the job overwrites the report with one of its own
+      # (here: "Configure Scalpel").
+      # The report travels through the monitoring inbox branch rather than as an artifact, and
+      # is linked from the job summary: https://mvn-perf.github.io/quarkus/
+      - name: Publish the mvn-lens build report
+        if: ${{ !cancelled() }}
+        uses: mvn-perf/build-monitor/report@main
         with:
-          name: "mvn-lens-${{ github.run_attempt }}-Initial JDK ${{ needs.configure.outputs.base-jdk-version }} Build"
-          path: target/mvnlens/report.html
-          retention-days: 7
+          job-name: "Initial JDK ${{ needs.configure.outputs.base-jdk-version }} Build"
       - name: Verify extension dependencies
         run: ./update-extension-dependencies.sh $COMMON_MAVEN_ARGS
       - name: Configure Scalpel
@@ -621,6 +627,10 @@ jobs:
       fail-fast: false
       matrix: ${{ fromJson(needs.calculate-test-jobs.outputs.jvm_matrix) }}
 
+    permissions:
+      contents: write   # build-monitor/report commits the mvn-lens report to the inbox branch
+      actions: read     # ... and identifies its own job/step through the Jobs API
+      packages: read    # (the workflow-level default, which a job-level block replaces)
     steps:
       - uses: runs-on/action@46910bf61b41721b0579f237e186afb35477007a # v2.3.0
       - name: Gradle Enterprise environment
@@ -637,6 +647,7 @@ jobs:
         run: git config --global core.longpaths true
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false   # keep the build-monitor write token out of .git/config
           # this is important for Scalpel to work
           fetch-depth: 0
       - name: Add quarkusio remote for Scalpel
@@ -719,16 +730,17 @@ jobs:
           # IMPORTANT: we cannot simply replace all spaces with new lines as we have a module with spaces in the name (to test spaces are supported)
           echo -e "$MATRIX_JAVA_MODULES" >> .mvn/maven.config
           ./mvnw $COMMON_MAVEN_ARGS $COMMON_TEST_MAVEN_ARGS $PTS_MAVEN_ARGS clean install -Dsurefire.timeout=1200 -Dno-test-kubernetes ${{ matrix.java.maven_args }}
-      - name: Archive the mvn-lens report
-        # Right after the build it profiles: a later Maven invocation would overwrite the report.
-        if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      # Right after the build it profiles: a later Maven invocation would overwrite the report.
+      # The execution root depends on matrix.java.modules - the integration legs pass
+      # "-f integration-tests" - so exactly one of these two paths exists per matrix leg.
+      - name: Publish the mvn-lens report
+        if: ${{ !cancelled() }}
+        uses: mvn-perf/build-monitor/report@main
         with:
-          name: "mvn-lens-${{ github.run_attempt }}-${{ matrix.java.name }}"
-          path: |
+          job-name: "${{ matrix.java.name }}"
+          report: |
             target/mvnlens/report.html
             integration-tests/target/mvnlens/report.html
-          retention-days: 7
       - name: Clean Gradle temp directory
         if: always()
         run: devtools/gradle/gradlew --stop && rm -rf devtools/gradle/gradle-extension-plugin/build/tmp
@@ -819,6 +831,10 @@ jobs:
             tag: "maven-jdk-25-semeru",
             runs-on: false
           }
+    permissions:
+      contents: write   # build-monitor/report commits the mvn-lens report to the inbox branch
+      actions: read     # ... and identifies its own job/step through the Jobs API
+      packages: read    # (the workflow-level default, which a job-level block replaces)
     steps:
       - uses: runs-on/action@46910bf61b41721b0579f237e186afb35477007a # v2.3.0
       - name: Gradle Enterprise environment
@@ -830,6 +846,7 @@ jobs:
         run: git config --global core.longpaths true
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false   # keep the build-monitor write token out of .git/config
           # this is important for Scalpel to work
           fetch-depth: 0
       - name: Add quarkusio remote for Scalpel
@@ -869,14 +886,12 @@ jobs:
         # Important: keep -pl ... in sync with "Calculate run flags"!
         # Despite the pre-calculated run_maven flag, Scalpel has to be re-run here to figure out the exact submodules to build.
         run: ./mvnw $COMMON_MAVEN_ARGS $COMMON_TEST_MAVEN_ARGS $PTS_MAVEN_ARGS $JVM_TEST_MAVEN_ARGS clean install -pl 'integration-tests/maven' -pl 'integration-tests/devmode' ${{ needs.initial-build.outputs.scalpel_args }}
-      - name: Archive the mvn-lens report
-        # Right after the build it profiles: a later Maven invocation would overwrite the report.
-        if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      # Right after the build it profiles: a later Maven invocation would overwrite the report.
+      - name: Publish the mvn-lens report
+        if: ${{ !cancelled() }}
+        uses: mvn-perf/build-monitor/report@main
         with:
-          name: "mvn-lens-${{ github.run_attempt }}-Maven Tests - JDK ${{matrix.java.name}}"
-          path: target/mvnlens/report.html
-          retention-days: 7
+          job-name: "Maven Tests - JDK ${{matrix.java.name}}"
       - name: Prepare failure archive (if maven failed)
         if: failure()
         run: find . -name '*-reports' -type d -o -name '*.log' | tar -czf test-reports.tgz -T -
@@ -941,6 +956,10 @@ jobs:
             tag: "gradle-jdk-${{ needs.configure.outputs.base-jdk-version }}-windows",
             runs-on: false
           }
+    permissions:
+      contents: write   # build-monitor/report commits the mvn-lens report to the inbox branch
+      actions: read     # ... and identifies its own job/step through the Jobs API
+      packages: read    # (the workflow-level default, which a job-level block replaces)
     steps:
       - uses: runs-on/action@46910bf61b41721b0579f237e186afb35477007a # v2.3.0
       - name: Gradle Enterprise environment
@@ -951,6 +970,8 @@ jobs:
         if: startsWith(matrix.java.os-name, 'windows')
         run: git config --global core.longpaths true
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false   # keep the build-monitor write token out of .git/config
       - name: Restore Maven Repository
         uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v5
         with:
@@ -990,14 +1011,12 @@ jobs:
           CAPTURE_BUILD_SCAN: true
         # Important: keep -pl ... in sync with "Calculate run flags"!
         run: ./mvnw $COMMON_MAVEN_ARGS $COMMON_TEST_MAVEN_ARGS $PTS_MAVEN_ARGS $JVM_TEST_MAVEN_ARGS clean install -pl integration-tests/gradle
-      - name: Archive the mvn-lens report
-        # Right after the build it profiles: a later Maven invocation would overwrite the report.
-        if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      # Right after the build it profiles: a later Maven invocation would overwrite the report.
+      - name: Publish the mvn-lens report
+        if: ${{ !cancelled() }}
+        uses: mvn-perf/build-monitor/report@main
         with:
-          name: "mvn-lens-${{ github.run_attempt }}-Gradle Tests - JDK ${{matrix.java.name}}"
-          path: target/mvnlens/report.html
-          retention-days: 7
+          job-name: "Gradle Tests - JDK ${{matrix.java.name}}"
       - name: Prepare build reports archive
         if: always()
         run: |
@@ -1054,6 +1073,10 @@ jobs:
             tag: "devtools-jdk-25-semeru",
             runs-on: false
           }
+    permissions:
+      contents: write   # build-monitor/report commits the mvn-lens report to the inbox branch
+      actions: read     # ... and identifies its own job/step through the Jobs API
+      packages: read    # (the workflow-level default, which a job-level block replaces)
     steps:
       - uses: runs-on/action@46910bf61b41721b0579f237e186afb35477007a # v2.3.0
       - name: Gradle Enterprise environment
@@ -1064,6 +1087,8 @@ jobs:
         if: startsWith(matrix.java.os-name, 'windows')
         run: git config --global core.longpaths true
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false   # keep the build-monitor write token out of .git/config
       - name: Restore Maven Repository
         uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v5
         with:
@@ -1098,14 +1123,12 @@ jobs:
           CAPTURE_BUILD_SCAN: true
         # Important: keep -pl ... in sync with "Calculate run flags"!
         run: ./mvnw $COMMON_MAVEN_ARGS $COMMON_TEST_MAVEN_ARGS $PTS_MAVEN_ARGS $JVM_TEST_MAVEN_ARGS clean install -pl 'integration-tests/devtools'
-      - name: Archive the mvn-lens report
-        # Right after the build it profiles: a later Maven invocation would overwrite the report.
-        if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      # Right after the build it profiles: a later Maven invocation would overwrite the report.
+      - name: Publish the mvn-lens report
+        if: ${{ !cancelled() }}
+        uses: mvn-perf/build-monitor/report@main
         with:
-          name: "mvn-lens-${{ github.run_attempt }}-Devtools Tests - JDK ${{matrix.java.name}}"
-          path: target/mvnlens/report.html
-          retention-days: 7
+          job-name: "Devtools Tests - JDK ${{matrix.java.name}}"
       - name: Prepare failure archive (if maven failed)
         if: failure()
         run: find . -name '*-reports' -type d -o -name '*.log' | tar -czf test-reports.tgz -T -
@@ -1163,6 +1186,10 @@ jobs:
             tag: "kubernetes-jdk-25-semeru",
             runs-on: false
           }
+    permissions:
+      contents: write   # build-monitor/report commits the mvn-lens report to the inbox branch
+      actions: read     # ... and identifies its own job/step through the Jobs API
+      packages: read    # (the workflow-level default, which a job-level block replaces)
     steps:
       - uses: runs-on/action@46910bf61b41721b0579f237e186afb35477007a # v2.3.0
       - name: Gradle Enterprise environment
@@ -1173,6 +1200,8 @@ jobs:
         if: startsWith(matrix.java.os-name, 'windows')
         run: git config --global core.longpaths true
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false   # keep the build-monitor write token out of .git/config
       - name: Restore Maven Repository
         uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v5
         with:
@@ -1207,14 +1236,13 @@ jobs:
           CAPTURE_BUILD_SCAN: true
         # Important: keep -pl ... in sync with "Calculate run flags"!
         run: ./mvnw $COMMON_MAVEN_ARGS $COMMON_TEST_MAVEN_ARGS $PTS_MAVEN_ARGS $JVM_TEST_MAVEN_ARGS clean install -f 'integration-tests/kubernetes'
-      - name: Archive the mvn-lens report
-        # Right after the build it profiles: a later Maven invocation would overwrite the report.
-        if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      # Right after the build it profiles: a later Maven invocation would overwrite the report.
+      - name: Publish the mvn-lens report
+        if: ${{ !cancelled() }}
+        uses: mvn-perf/build-monitor/report@main
         with:
-          name: "mvn-lens-${{ github.run_attempt }}-Kubernetes Tests - JDK ${{matrix.java.name}}"
-          path: integration-tests/kubernetes/target/mvnlens/report.html
-          retention-days: 7
+          job-name: "Kubernetes Tests - JDK ${{matrix.java.name}}"
+          report: integration-tests/kubernetes/target/mvnlens/report.html
       - name: Prepare failure archive (if maven failed)
         if: failure()
         run: find . -name '*-reports' -type d -o -name '*.log' | tar -czf test-reports.tgz -T -
@@ -1479,6 +1507,10 @@ jobs:
       max-parallel: ${{ fromJson(needs.configure.outputs.config).maxParallel || 12 }}
       fail-fast: false
       matrix: ${{ fromJson(needs.calculate-test-jobs.outputs.virtual_threads_matrix) }}
+    permissions:
+      contents: write   # build-monitor/report commits the mvn-lens report to the inbox branch
+      actions: read     # ... and identifies its own job/step through the Jobs API
+      packages: read    # (the workflow-level default, which a job-level block replaces)
     steps:
       - uses: runs-on/action@46910bf61b41721b0579f237e186afb35477007a # v2.3.0
       - name: Gradle Enterprise environment
@@ -1487,6 +1519,8 @@ jobs:
           echo "GE_TAGS=virtual-thread-native-${category}" >> "$GITHUB_ENV"
           echo "GE_CUSTOM_VALUES=gh-job-name=Native Tests - Virtual Thread - ${{matrix.category}}" >> "$GITHUB_ENV"
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false   # keep the build-monitor write token out of .git/config
       - name: Restore Maven Repository
         uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v5
         with:
@@ -1529,14 +1563,13 @@ jobs:
           CAPTURE_BUILD_SCAN: true
         run: |
           export LANG=en_US && ./mvnw $COMMON_MAVEN_ARGS $COMMON_TEST_MAVEN_ARGS $PTS_MAVEN_ARGS -f integration-tests -pl "$TEST_MODULES" $NATIVE_TEST_MAVEN_ARGS -Dextra-args=--enable-preview -Dquarkus.native.container-build=true
-      - name: Archive the mvn-lens report
-        # Right after the build it profiles: a later Maven invocation would overwrite the report.
-        if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      # Right after the build it profiles: a later Maven invocation would overwrite the report.
+      - name: Publish the mvn-lens report
+        if: ${{ !cancelled() }}
+        uses: mvn-perf/build-monitor/report@main
         with:
-          name: "mvn-lens-${{ github.run_attempt }}-Native Tests - Virtual Thread - ${{matrix.category}}"
-          path: integration-tests/target/mvnlens/report.html
-          retention-days: 7
+          job-name: "Native Tests - Virtual Thread - ${{matrix.category}}"
+          report: integration-tests/target/mvnlens/report.html
       - name: Prepare build reports archive
         if: always()
         run: |
@@ -1564,6 +1597,10 @@ jobs:
       COMMON_MAVEN_ARGS: ${{ needs.configure.outputs.common-maven-args }}
       RUNS_ON_ENABLED: ${{ fromJson(needs.configure.outputs.config).runners['ubuntu-latest'].runsOn && 'true' || 'false' }}
     timeout-minutes: 150
+    permissions:
+      contents: write   # build-monitor/report commits the mvn-lens report to the inbox branch
+      actions: read     # ... and identifies its own job/step through the Jobs API
+      packages: read    # (the workflow-level default, which a job-level block replaces)
     steps:
       - uses: runs-on/action@46910bf61b41721b0579f237e186afb35477007a # v2.3.0
       - name: Gradle Enterprise environment
@@ -1572,6 +1609,7 @@ jobs:
           echo "GE_CUSTOM_VALUES=gh-job-name=MicroProfile TCKs Tests" >> "$GITHUB_ENV"
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false   # keep the build-monitor write token out of .git/config
           # this is important for Scalpel to work
           fetch-depth: 0
       - name: Add quarkusio remote
@@ -1613,14 +1651,12 @@ jobs:
         # Important: keep -pl ... in sync with "Calculate run flags"!
         # Despite the pre-calculated run_tcks flag, Scalpel has to be re-run here to figure out the exact tcks submodules to build.
         run: ./mvnw $COMMON_MAVEN_ARGS $COMMON_TEST_MAVEN_ARGS $PTS_MAVEN_ARGS -Dtcks -pl tcks -amd clean install ${{ needs.initial-build.outputs.scalpel_args }}
-      - name: Archive the mvn-lens report
-        # Right after the build it profiles: a later Maven invocation would overwrite the report.
-        if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      # Right after the build it profiles: a later Maven invocation would overwrite the report.
+      - name: Publish the mvn-lens report
+        if: ${{ !cancelled() }}
+        uses: mvn-perf/build-monitor/report@main
         with:
-          name: "mvn-lens-${{ github.run_attempt }}-MicroProfile TCKs Tests"
-          path: target/mvnlens/report.html
-          retention-days: 7
+          job-name: "MicroProfile TCKs Tests"
       - name: Verify resteasy-reative dependencies
         # note: ideally, this would be run _before_ mvnw but that would required building tcks/resteasy-reactive in two steps
         run: ./tcks/resteasy-reactive/update-dependencies.sh $COMMON_MAVEN_ARGS
@@ -1670,6 +1706,10 @@ jobs:
       #max-parallel: ${{ fromJson(needs.configure.outputs.config).maxParallel || 12 }}
       fail-fast: false
       matrix: ${{ fromJson(needs.calculate-test-jobs.outputs.native_matrix) }}
+    permissions:
+      contents: write   # build-monitor/report commits the mvn-lens report to the inbox branch
+      actions: read     # ... and identifies its own job/step through the Jobs API
+      packages: read    # (the workflow-level default, which a job-level block replaces)
     steps:
       - uses: runs-on/action@46910bf61b41721b0579f237e186afb35477007a # v2.3.0
       - name: Gradle Enterprise environment
@@ -1681,6 +1721,8 @@ jobs:
         if: startsWith(matrix.os-name, 'windows')
         run: git config --global core.longpaths true
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false   # keep the build-monitor write token out of .git/config
       - name: Reclaim Disk Space
         run: .github/ci-prerequisites.sh
         if: ${{ !startsWith(matrix.os-name, 'windows') }}
@@ -1758,14 +1800,13 @@ jobs:
           CONTAINER_BUILD: ${{startsWith(matrix.os-name, 'windows') && 'false' || 'true'}}
           CAPTURE_BUILD_SCAN: true
         run: ./mvnw $COMMON_MAVEN_ARGS $COMMON_TEST_MAVEN_ARGS $PTS_MAVEN_ARGS -f integration-tests -pl "$TEST_MODULES" $NATIVE_TEST_MAVEN_ARGS -Dquarkus.native.container-build=$CONTAINER_BUILD
-      - name: Archive the mvn-lens report
-        # Right after the build it profiles: a later Maven invocation would overwrite the report.
-        if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      # Right after the build it profiles: a later Maven invocation would overwrite the report.
+      - name: Publish the mvn-lens report
+        if: ${{ !cancelled() }}
+        uses: mvn-perf/build-monitor/report@main
         with:
-          name: "mvn-lens-${{ github.run_attempt }}-Native Tests - ${{matrix.category}}"
-          path: integration-tests/target/mvnlens/report.html
-          retention-days: 7
+          job-name: "Native Tests - ${{matrix.category}}"
+          report: integration-tests/target/mvnlens/report.html
       - name: Prepare failure archive (if maven failed)
         if: failure()
         run: find . -type d -name '*-reports' -o -wholename '*/build/reports/tests/functionalTest' -o -name '*.log' | tar -czf test-reports.tgz -T -
@@ -2120,11 +2161,17 @@ jobs:
     timeout-minutes: 60
     env:
       COMMON_MAVEN_ARGS: ${{ needs.configure.outputs.common-maven-args }}
+    permissions:
+      contents: write   # build-monitor/report commits the mvn-lens report to the inbox branch
+      actions: read     # ... and identifies its own job/step through the Jobs API
+      packages: read    # (the workflow-level default, which a job-level block replaces)
     steps:
       - name: Install container dependencies
         run: |
           apt-get update && apt-get install -y git curl unzip openssl libssl-dev libapr1t64 p7zip-full
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false   # keep the build-monitor write token out of .git/config
       - name: Set up JDK 21
         uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5.7.0
         with:
@@ -2152,19 +2199,22 @@ jobs:
       - name: Run PQC tests Vertx-http
         run: |
           ./mvnw $COMMON_MAVEN_ARGS $COMMON_TEST_MAVEN_ARGS $JVM_TEST_MAVEN_ARGS -Dmaven.repo.local=$HOME/.m2/repository -Dtest=HybridKeyExchangeTest,HybridKeyExchangeMtlsTest,HybridKeyExchangeClientNegotiatedTest,HybridKeyExchangeClientNegotiatedNoGroupsTest,HybridKeyExchangeClientNegotiatedIllGroupsTest,HybridKeyExchangeStrictNoGroupsTest,HybridKeyExchangeStrictIllGroupsTest,HybridKeyExchangeRelaxedTest,HybridKeyExchangeRelaxedNoGroupsTest,HybridKeyExchangeJdkSslStrictInvalidTest,HybridKeyExchangeJdkSslClientNegotiatedInvalidTest,HybridKeyExchangeNamedBucketTest -f extensions/vertx-http/deployment test
+      # One report step per Maven invocation, right after the build it profiles.
+      - name: Publish the mvn-lens report (vertx-http)
+        if: ${{ !cancelled() }}
+        uses: mvn-perf/build-monitor/report@main
+        with:
+          job-name: "PQC Tests"
+          report: extensions/vertx-http/deployment/target/mvnlens/report.html
       - name: Run PQC tests resteasy-reactive
         run: |
           ./mvnw $COMMON_MAVEN_ARGS $COMMON_TEST_MAVEN_ARGS $JVM_TEST_MAVEN_ARGS -Dmaven.repo.local=$HOME/.m2/repository -Dtest=PqcKeyExchangeTest -f extensions/resteasy-reactive/rest-client/deployment test
-      - name: Archive the mvn-lens reports
-        # Right after the build it profiles: a later Maven invocation would overwrite the report.
-        if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      - name: Publish the mvn-lens report (resteasy-reactive)
+        if: ${{ !cancelled() }}
+        uses: mvn-perf/build-monitor/report@main
         with:
-          name: "mvn-lens-${{ github.run_attempt }}-PQC Tests"
-          path: |
-            extensions/vertx-http/deployment/target/mvnlens/report.html
-            extensions/resteasy-reactive/rest-client/deployment/target/mvnlens/report.html
-          retention-days: 7
+          job-name: "PQC Tests"
+          report: extensions/resteasy-reactive/rest-client/deployment/target/mvnlens/report.html
       - name: Prepare failure archive (if maven failed)
         if: failure()
         run: find . -name '*-reports' -type d -o -name '*.log' | tar -czf test-reports.tgz -T -
@@ -2212,3 +2262,18 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           build-reports-artifacts-path: build-reports-artifacts
+
+  # Writes the "Open this run in the monitoring page" link and the per-job table (result,
+  # duration, Maven total, report links) into the run summary. The page itself is published by
+  # .github/workflows/build-monitor.yml once the run completes.
+  monitoring:
+    name: Build monitoring
+    needs: [initial-build,jvm-tests,maven-tests,gradle-tests,devtools-tests,kubernetes-tests,tcks-test,native-tests,virtual-thread-native-tests,pqc-tests]
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - name: Link the monitoring page from the run summary
+        uses: mvn-perf/build-monitor/summary@main

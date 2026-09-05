@@ -416,8 +416,9 @@ in `quarkus-parent` (root `pom.xml`).
 Every Maven invocation loads [mvn-lens](https://github.com/mvn-perf/mvn-lens), a JFR-based build profiler
 declared as a core extension in `.mvn/extensions.xml`. At the end of each session - a failed one included -
 it writes `target/mvnlens/report.html`, a self-contained HTML dashboard of the build: timeline, GC, JIT and
-slowest tests. CI archives it as the `mvn-lens-*` artifact of each job. Pass `-Dmvnlens.disabled=true` to
-switch the profiler off for a single invocation.
+slowest tests. CI publishes it to the [build monitoring page](https://mvn-perf.github.io/quarkus/) - one
+click from the GitHub step that produced it, with the build history of every job - rather than as an
+artifact. Pass `-Dmvnlens.disabled=true` to switch the profiler off for a single invocation.
 
 mvn-lens is only published as a SNAPSHOT so far. Maven resolves core extensions before it reads any
 `pom.xml`, from the repositories contributed by an active profile of `settings.xml` alone, so the build
