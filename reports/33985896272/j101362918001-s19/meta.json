@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 33985896272,
+  "runNumber": 13,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "jvm-tests",
+  "jobId": 101362918001,
+  "jobName": "JVM Tests - JDK 21",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/33985896272/job/101362918001",
+  "runnerName": "GitHub Actions 1000001980",
+  "stepNumber": 19,
+  "stepName": "Build",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101362918001-s19",
+  "collectedAt": "2026-09-06T03:25:17.707Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-parent",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "21.0.12.1",
+        "status": "OK",
+        "startedAt": 1788649727443,
+        "endedAt": 1788665081344,
+        "totalMs": 15354774,
+        "wallMs": 15353900,
+        "cpuMs": 6914507,
+        "gcMs": 414438,
+        "gcCount": 17478,
+        "jitMs": 4818227,
+        "c2Ms": 4802097,
+        "downloadMs": 12901,
+        "downloadBytes": 70323444,
+        "downloadCount": 90,
+        "moduleCount": 1037,
+        "slowestMojo": {
+          "plugin": "org.apache.maven.plugins:maven-surefire-plugin",
+          "goal": "test",
+          "phase": "test",
+          "executionId": "default-test",
+          "moduleKey": "io.quarkus:quarkus-vertx-http-deployment:999-SNAPSHOT",
+          "durationMs": 747784
+        },
+        "slowestTest": {
+          "className": "io.quarkus.oidc.client.OidcClientKeycloakDevServiceRealmFileModificationTest",
+          "methodName": "testRealmFileModification",
+          "displayName": "testRealmFileModification()",
+          "framework": "JUNIT5",
+          "durationMs": 63329
+        },
+        "testCount": 11,
+        "testMs": 416176,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 16766414848,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 26330526
+    }
+  ]
+}
