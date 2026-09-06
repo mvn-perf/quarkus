@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 33985896272,
+  "runNumber": 13,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "native-tests",
+  "jobId": 101362918195,
+  "jobName": "Native Tests - AWT, ImageIO and Java2D, Packaging .so files",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/33985896272/job/101362918195",
+  "runnerName": "GitHub Actions 1000001977",
+  "stepNumber": 18,
+  "stepName": "Build",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101362918195-s18",
+  "collectedAt": "2026-09-05T23:13:32.065Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "integration-tests/target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-integration-test-awt",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "25.0.4.1",
+        "status": "OK",
+        "startedAt": 1788649378770,
+        "endedAt": 1788650006408,
+        "totalMs": 628575,
+        "wallMs": 627637,
+        "cpuMs": 47117,
+        "gcMs": 1159,
+        "gcCount": 124,
+        "jitMs": 40494,
+        "c2Ms": 40494,
+        "downloadMs": 1014,
+        "downloadBytes": 688191,
+        "downloadCount": 11,
+        "moduleCount": 3,
+        "slowestMojo": {
+          "plugin": "io.quarkus:quarkus-maven-plugin",
+          "goal": "build",
+          "phase": "package",
+          "executionId": "default",
+          "moduleKey": "io.quarkus:quarkus-integration-test-awt:999-SNAPSHOT",
+          "durationMs": 207741
+        },
+        "slowestTest": {
+          "className": "io.quarkus.awt.it.ImageEncodersIT",
+          "methodName": "testEncoders",
+          "displayName": "testEncoders()",
+          "framework": "JUNIT5",
+          "durationMs": 8001
+        },
+        "testCount": 10,
+        "testMs": 18220,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 16766414848,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 1845005
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 33985896272,
+  "runNumber": 13,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "native-tests",
+  "jobId": 101362918113,
+  "jobName": "Native Tests - Messaging2",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/33985896272/job/101362918113",
+  "runnerName": "GitHub Actions 1000001937",
+  "stepNumber": 18,
+  "stepName": "Build",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101362918113-s18",
+  "collectedAt": "2026-09-05T22:11:19.383Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "integration-tests/target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-integration-test-amqp",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "25.0.4.1",
+        "status": "OK",
+        "startedAt": 1788645481875,
+        "endedAt": 1788646274701,
+        "totalMs": 793503,
+        "wallMs": 792826,
+        "cpuMs": 62712,
+        "gcMs": 2114,
+        "gcCount": 156,
+        "jitMs": 47400,
+        "c2Ms": 47400,
+        "downloadMs": 1045,
+        "downloadBytes": 688191,
+        "downloadCount": 11,
+        "moduleCount": 4,
+        "slowestMojo": {
+          "plugin": "io.quarkus:quarkus-maven-plugin",
+          "goal": "build",
+          "phase": "package",
+          "executionId": "default",
+          "moduleKey": "io.quarkus:quarkus-integration-test-reactive-messaging-pulsar:999-SNAPSHOT",
+          "durationMs": 273855
+        },
+        "slowestTest": {
+          "className": "io.quarkus.it.rabbitmq.RabbitMQConnectorIT",
+          "methodName": "test",
+          "displayName": "test()",
+          "framework": "JUNIT5",
+          "durationMs": 2990
+        },
+        "testCount": 9,
+        "testMs": 9115,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 16766414848,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 1942694
+    }
+  ]
+}

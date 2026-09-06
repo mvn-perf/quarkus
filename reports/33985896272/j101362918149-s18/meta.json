@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 33985896272,
+  "runNumber": 13,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "native-tests",
+  "jobId": 101362918149,
+  "jobName": "Native Tests - Cache",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/33985896272/job/101362918149",
+  "runnerName": "GitHub Actions 1000001975",
+  "stepNumber": 18,
+  "stepName": "Build",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101362918149-s18",
+  "collectedAt": "2026-09-05T23:21:19.740Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "integration-tests/target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-integration-test-infinispan-client",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "25.0.4.1",
+        "status": "OK",
+        "startedAt": 1788649021350,
+        "endedAt": 1788650474555,
+        "totalMs": 1453844,
+        "wallMs": 1453204,
+        "cpuMs": 92967,
+        "gcMs": 2841,
+        "gcCount": 248,
+        "jitMs": 70761,
+        "c2Ms": 70761,
+        "downloadMs": 3765,
+        "downloadBytes": 6122879,
+        "downloadCount": 39,
+        "moduleCount": 7,
+        "slowestMojo": {
+          "plugin": "io.quarkus:quarkus-maven-plugin",
+          "goal": "build",
+          "phase": "package",
+          "executionId": "default",
+          "moduleKey": "io.quarkus:quarkus-integration-test-cache:999-SNAPSHOT",
+          "durationMs": 238004
+        },
+        "slowestTest": {
+          "className": "io.quarkus.it.cache.redis.CacheIT",
+          "methodName": "testCache",
+          "displayName": "testCache()",
+          "framework": "JUNIT5",
+          "durationMs": 1882
+        },
+        "testCount": 10,
+        "testMs": 11558,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 16766414848,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 2298802
+    }
+  ]
+}

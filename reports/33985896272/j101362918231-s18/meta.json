@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 33985896272,
+  "runNumber": 13,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "native-tests",
+  "jobId": 101362918231,
+  "jobName": "Native Tests - Windows support",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/33985896272/job/101362918231",
+  "runnerName": "GitHub Actions 1000001884",
+  "stepNumber": 18,
+  "stepName": "Build",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101362918231-s18",
+  "collectedAt": "2026-09-05T20:44:47.256Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "integration-tests/target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-integration-test-liquibase",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "25.0.4.1",
+        "status": "OK",
+        "startedAt": 1788640257677,
+        "endedAt": 1788641082942,
+        "totalMs": 825568,
+        "wallMs": 825264,
+        "cpuMs": 64914,
+        "gcMs": 0,
+        "gcCount": 150,
+        "jitMs": 60677,
+        "c2Ms": 60677,
+        "downloadMs": 585172,
+        "downloadBytes": 192244537,
+        "downloadCount": 1057,
+        "moduleCount": 3,
+        "slowestMojo": {
+          "plugin": "io.quarkus:quarkus-maven-plugin",
+          "goal": "build",
+          "phase": "package",
+          "executionId": "default",
+          "moduleKey": "io.quarkus:quarkus-integration-test-qute:999-SNAPSHOT",
+          "durationMs": 262015
+        },
+        "slowestTest": {
+          "className": "io.quarkus.it.qute.QuteITCase",
+          "methodName": "testTemplates",
+          "displayName": "testTemplates()",
+          "framework": "JUNIT5",
+          "durationMs": 1963
+        },
+        "testCount": 10,
+        "testMs": 6931,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 17174360064,
+          "osName": "Windows Server 2025 , 64 bit Build 26100 (10.0.26100.33296)",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 1860870
+    }
+  ]
+}

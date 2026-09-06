@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 33985896272,
+  "runNumber": 13,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "native-tests",
+  "jobId": 101362918119,
+  "jobName": "Native Tests - Data6",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/33985896272/job/101362918119",
+  "runnerName": "GitHub Actions 1000001907",
+  "stepNumber": 18,
+  "stepName": "Build",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101362918119-s18",
+  "collectedAt": "2026-09-05T21:35:29.609Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "integration-tests/target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-integration-test-hibernate-search-orm-elasticsearch",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "25.0.4.1",
+        "status": "OK",
+        "startedAt": 1788642030738,
+        "endedAt": 1788644124142,
+        "totalMs": 2093816,
+        "wallMs": 2093403,
+        "cpuMs": 124950,
+        "gcMs": 4325,
+        "gcCount": 328,
+        "jitMs": 108263,
+        "c2Ms": 107578,
+        "downloadMs": 4117,
+        "downloadBytes": 6122879,
+        "downloadCount": 39,
+        "moduleCount": 8,
+        "slowestMojo": {
+          "plugin": "io.quarkus:quarkus-maven-plugin",
+          "goal": "build",
+          "phase": "package",
+          "executionId": "default",
+          "moduleKey": "io.quarkus:quarkus-integration-test-hibernate-search-orm-elasticsearch:999-SNAPSHOT",
+          "durationMs": 286800
+        },
+        "slowestTest": {
+          "className": "io.quarkus.it.hibernate.search.orm.elasticsearch.coordination.outboxpolling.HibernateSearchOutboxPollingInGraalIT",
+          "methodName": "testSearch",
+          "displayName": "testSearch()",
+          "framework": "JUNIT5",
+          "durationMs": 6420
+        },
+        "testCount": 10,
+        "testMs": 30239,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 16766414848,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 2635044
+    }
+  ]
+}

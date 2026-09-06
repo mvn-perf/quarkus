@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 33985896272,
+  "runNumber": 13,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "native-tests",
+  "jobId": 101362918191,
+  "jobName": "Native Tests - gRPC",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/33985896272/job/101362918191",
+  "runnerName": "GitHub Actions 1000001933",
+  "stepNumber": 18,
+  "stepName": "Build",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101362918191-s18",
+  "collectedAt": "2026-09-05T22:07:11.110Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "integration-tests/target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-integration-test-grpc-tls",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "25.0.4.1",
+        "status": "OK",
+        "startedAt": 1788644424179,
+        "endedAt": 1788646025565,
+        "totalMs": 1603268,
+        "wallMs": 1601385,
+        "cpuMs": 100861,
+        "gcMs": 4117,
+        "gcCount": 383,
+        "jitMs": 56723,
+        "c2Ms": 56723,
+        "downloadMs": 2087,
+        "downloadBytes": 688191,
+        "downloadCount": 11,
+        "moduleCount": 13,
+        "slowestMojo": {
+          "plugin": "io.quarkus:quarkus-maven-plugin",
+          "goal": "build",
+          "phase": "package",
+          "executionId": "default",
+          "moduleKey": "io.quarkus:quarkus-integration-test-grpc-tls:999-SNAPSHOT",
+          "durationMs": 151677
+        },
+        "slowestTest": {
+          "className": "io.quarkus.grpc.example.streaming.LongStreamTest",
+          "methodName": "#1",
+          "displayName": "repetition 1 of 5",
+          "framework": "JUNIT5",
+          "durationMs": 2138
+        },
+        "testCount": 10,
+        "testMs": 18826,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 2,
+          "cpuThreads": 4,
+          "memoryBytes": 16765378560,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 2744054
+    }
+  ]
+}

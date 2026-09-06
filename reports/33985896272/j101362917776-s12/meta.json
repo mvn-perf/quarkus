@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 33985896272,
+  "runNumber": 13,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "tcks-test",
+  "jobId": 101362917776,
+  "jobName": "MicroProfile TCKs Tests",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/33985896272/job/101362917776",
+  "runnerName": "GitHub Actions 1000001851",
+  "stepNumber": 12,
+  "stepName": "Verify",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101362917776-s12",
+  "collectedAt": "2026-09-05T21:02:47.799Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-tck-parent",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "21.0.12.1",
+        "status": "OK",
+        "startedAt": 1788637955605,
+        "endedAt": 1788642151852,
+        "totalMs": 4197118,
+        "wallMs": 4196247,
+        "cpuMs": 1534443,
+        "gcMs": 45164,
+        "gcCount": 3948,
+        "jitMs": 1141409,
+        "c2Ms": 1141409,
+        "downloadMs": 2071,
+        "downloadBytes": 865713,
+        "downloadCount": 23,
+        "moduleCount": 17,
+        "slowestMojo": {
+          "plugin": "org.apache.maven.plugins:maven-surefire-plugin",
+          "goal": "test",
+          "phase": "test",
+          "executionId": "default-test",
+          "moduleKey": "io.quarkus:quarkus-tck-microprofile-fault-tolerance:999-SNAPSHOT",
+          "durationMs": 1339275
+        },
+        "slowestTest": {
+          "className": "org.eclipse.microprofile.rest.client.tck.timeout.TimeoutViaMPConfigWithConfigKeyTest",
+          "methodName": "testReadTimeout",
+          "displayName": "testReadTimeout",
+          "framework": "TESTNG",
+          "durationMs": 56289
+        },
+        "testCount": 22,
+        "testMs": 389927,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 16766410752,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 9350613
+    }
+  ]
+}
