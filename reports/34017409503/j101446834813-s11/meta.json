@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 34017409503,
+  "runNumber": 16,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "devtools-tests",
+  "jobId": 101446834813,
+  "jobName": "Devtools Tests - JDK 25",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/34017409503/job/101446834813",
+  "runnerName": "GitHub Actions 1000002102",
+  "stepNumber": 11,
+  "stepName": "Build",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101446834813-s11",
+  "collectedAt": "2026-09-06T07:30:26.664Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-integration-test-devtools",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "25.0.4.1",
+        "status": "OK",
+        "startedAt": 1788679185999,
+        "endedAt": 1788679823916,
+        "totalMs": 639728,
+        "wallMs": 637916,
+        "cpuMs": 22911,
+        "gcMs": 806,
+        "gcCount": 85,
+        "jitMs": 18363,
+        "c2Ms": 18363,
+        "downloadMs": 597,
+        "downloadBytes": 688191,
+        "downloadCount": 11,
+        "moduleCount": 1,
+        "slowestMojo": {
+          "plugin": "org.apache.maven.plugins:maven-failsafe-plugin",
+          "goal": "integration-test",
+          "phase": "integration-test",
+          "executionId": "default",
+          "moduleKey": "io.quarkus:quarkus-integration-test-devtools:999-SNAPSHOT",
+          "durationMs": 511495
+        },
+        "slowestTest": {
+          "className": "io.quarkus.devtools.codestarts.quarkus.KotlinSerializationCodestartTest",
+          "methodName": "buildAllProjectsGradle",
+          "displayName": "buildAllProjectsGradle()",
+          "framework": "JUNIT5",
+          "durationMs": 57859
+        },
+        "testCount": 10,
+        "testMs": 338485,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 16766414848,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 1846690
+    }
+  ]
+}

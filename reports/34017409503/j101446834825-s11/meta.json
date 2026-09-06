@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 34017409503,
+  "runNumber": 16,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "devtools-tests",
+  "jobId": 101446834825,
+  "jobName": "Devtools Tests - JDK 21 Windows",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/34017409503/job/101446834825",
+  "runnerName": "GitHub Actions 1000002112",
+  "stepNumber": 11,
+  "stepName": "Build",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101446834825-s11",
+  "collectedAt": "2026-09-06T07:54:28.318Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-integration-test-devtools",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "21.0.12.1",
+        "status": "OK",
+        "startedAt": 1788679872216,
+        "endedAt": 1788681263226,
+        "totalMs": 1391921,
+        "wallMs": 1391009,
+        "cpuMs": 61286,
+        "gcMs": 1,
+        "gcCount": 106,
+        "jitMs": 50261,
+        "c2Ms": 50261,
+        "downloadMs": 188785,
+        "downloadBytes": 105644353,
+        "downloadCount": 734,
+        "moduleCount": 1,
+        "slowestMojo": {
+          "plugin": "org.apache.maven.plugins:maven-failsafe-plugin",
+          "goal": "integration-test",
+          "phase": "integration-test",
+          "executionId": "default",
+          "moduleKey": "io.quarkus:quarkus-integration-test-devtools:999-SNAPSHOT",
+          "durationMs": 1076984
+        },
+        "slowestTest": {
+          "className": "io.quarkus.devtools.codestarts.quarkus.KotlinSerializationCodestartTest",
+          "methodName": "buildAllProjectsGradle",
+          "displayName": "buildAllProjectsGradle()",
+          "framework": "JUNIT5",
+          "durationMs": 143072
+        },
+        "testCount": 10,
+        "testMs": 737463,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 17178693632,
+          "osName": "Windows Server 2025 , 64 bit Build 26100 (10.0.26100.33296)",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 2213179
+    }
+  ]
+}

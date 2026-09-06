@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 34017409503,
+  "runNumber": 16,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "initial-build",
+  "jobId": 101443593813,
+  "jobName": "Initial JDK 21 Build",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/34017409503/job/101443593813",
+  "runnerName": "GitHub Actions 1000002020",
+  "stepNumber": 18,
+  "stepName": "Build",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101443593813-s18",
+  "collectedAt": "2026-09-06T07:06:55.804Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-parent",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 4,
+        "builderId": "multithreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "21.0.12.1",
+        "status": "OK",
+        "startedAt": 1788677679773,
+        "endedAt": 1788678397962,
+        "totalMs": 718608,
+        "wallMs": 718188,
+        "cpuMs": 531305,
+        "gcMs": 21367,
+        "gcCount": 516,
+        "jitMs": 498429,
+        "c2Ms": 496917,
+        "downloadMs": 0,
+        "downloadBytes": 0,
+        "downloadCount": 0,
+        "moduleCount": 1441,
+        "slowestMojo": {
+          "plugin": "org.codehaus.mojo:exec-maven-plugin",
+          "goal": "exec",
+          "phase": "prepare-package",
+          "executionId": "gradle",
+          "moduleKey": "io.quarkus:quarkus-gradle-model:999-SNAPSHOT",
+          "durationMs": 175897
+        },
+        "slowestTest": null,
+        "testCount": 0,
+        "testMs": 0,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 16766410752,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 14313298
+    }
+  ]
+}

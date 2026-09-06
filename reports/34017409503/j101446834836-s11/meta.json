@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 34017409503,
+  "runNumber": 16,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "virtual-thread-native-tests",
+  "jobId": 101446834836,
+  "jobName": "Native Tests - Virtual Thread - Messaging",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/34017409503/job/101446834836",
+  "runnerName": "GitHub Actions 1000002100",
+  "stepNumber": 11,
+  "stepName": "Build",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101446834836-s11",
+  "collectedAt": "2026-09-06T07:29:05.725Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "integration-tests/target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-integration-test-virtual-threads-kafka",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "25.0.4.1",
+        "status": "OK",
+        "startedAt": 1788679083681,
+        "endedAt": 1788679742682,
+        "totalMs": 659711,
+        "wallMs": 659001,
+        "cpuMs": 41608,
+        "gcMs": 1337,
+        "gcCount": 76,
+        "jitMs": 39373,
+        "c2Ms": 39226,
+        "downloadMs": 1100,
+        "downloadBytes": 688191,
+        "downloadCount": 11,
+        "moduleCount": 3,
+        "slowestMojo": {
+          "plugin": "io.quarkus:quarkus-maven-plugin",
+          "goal": "build",
+          "phase": "package",
+          "executionId": "default",
+          "moduleKey": "io.quarkus:quarkus-integration-test-virtual-threads-kafka:999-SNAPSHOT",
+          "durationMs": 240006
+        },
+        "slowestTest": {
+          "className": "io.quarkus.it.vthreads.amqp.VirtualThreadITCase",
+          "methodName": "testAlert",
+          "displayName": "testAlert()",
+          "framework": "JUNIT5",
+          "durationMs": 2227
+        },
+        "testCount": 4,
+        "testMs": 7733,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 16766414848,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 1833940
+    }
+  ]
+}
