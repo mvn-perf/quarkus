@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 34017409503,
+  "runNumber": 16,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "maven-tests",
+  "jobId": 101446834860,
+  "jobName": "Maven Tests - JDK 21 Windows",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/34017409503/job/101446834860",
+  "runnerName": "GitHub Actions 1000002121",
+  "stepNumber": 12,
+  "stepName": "Build",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101446834860-s12",
+  "collectedAt": "2026-09-06T09:03:36.353Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-integration-test-maven",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "21.0.12.1",
+        "status": "OK",
+        "startedAt": 1788680807239,
+        "endedAt": 1788685402866,
+        "totalMs": 4597095,
+        "wallMs": 4595626,
+        "cpuMs": 370117,
+        "gcMs": 93,
+        "gcCount": 637,
+        "jitMs": 355194,
+        "c2Ms": 351514,
+        "downloadMs": 1238940,
+        "downloadBytes": 975133445,
+        "downloadCount": 2579,
+        "moduleCount": 2,
+        "slowestMojo": {
+          "plugin": "org.apache.maven.plugins:maven-failsafe-plugin",
+          "goal": "integration-test",
+          "phase": "integration-test",
+          "executionId": "default",
+          "moduleKey": "io.quarkus:quarkus-integration-test-maven:999-SNAPSHOT",
+          "durationMs": 3838350
+        },
+        "slowestTest": {
+          "className": "io.quarkus.maven.it.BuildIT",
+          "methodName": "testMultiBuildMode",
+          "displayName": "testMultiBuildMode()",
+          "framework": "JUNIT5",
+          "durationMs": 71126
+        },
+        "testCount": 10,
+        "testMs": 521067,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 17174360064,
+          "osName": "Windows Server 2025 , 64 bit Build 26100 (10.0.26100.33296)",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 3926759
+    }
+  ]
+}

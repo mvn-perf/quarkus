@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 34017409503,
+  "runNumber": 16,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "native-tests",
+  "jobId": 101446835111,
+  "jobName": "Native Tests - AWT, ImageIO and Java2D, Packaging .dll files (Windows)",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/34017409503/job/101446835111",
+  "runnerName": "GitHub Actions 1000002135",
+  "stepNumber": 18,
+  "stepName": "Build",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101446835111-s18",
+  "collectedAt": "2026-09-06T08:13:55.393Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "integration-tests/target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-integration-test-awt",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "25.0.4.1",
+        "status": "OK",
+        "startedAt": 1788681667520,
+        "endedAt": 1788682431495,
+        "totalMs": 764288,
+        "wallMs": 763974,
+        "cpuMs": 62701,
+        "gcMs": 0,
+        "gcCount": 139,
+        "jitMs": 55575,
+        "c2Ms": 55575,
+        "downloadMs": 367805,
+        "downloadBytes": 156917107,
+        "downloadCount": 980,
+        "moduleCount": 3,
+        "slowestMojo": {
+          "plugin": "io.quarkus:quarkus-maven-plugin",
+          "goal": "build",
+          "phase": "package",
+          "executionId": "default",
+          "moduleKey": "io.quarkus:quarkus-integration-test-awt-packaging:999-SNAPSHOT",
+          "durationMs": 251414
+        },
+        "slowestTest": {
+          "className": "io.quarkus.awt.it.ImageEncodersIT",
+          "methodName": "testEncoders",
+          "displayName": "testEncoders()",
+          "framework": "JUNIT5",
+          "durationMs": 20494
+        },
+        "testCount": 10,
+        "testMs": 30219,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 17178693632,
+          "osName": "Windows Server 2025 , 64 bit Build 26100 (10.0.26100.33296)",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 1853514
+    }
+  ]
+}

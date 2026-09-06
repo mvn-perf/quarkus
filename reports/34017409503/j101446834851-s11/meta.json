@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 34017409503,
+  "runNumber": 16,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "virtual-thread-native-tests",
+  "jobId": 101446834851,
+  "jobName": "Native Tests - Virtual Thread - Main",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/34017409503/job/101446834851",
+  "runnerName": "GitHub Actions 1000002116",
+  "stepNumber": 11,
+  "stepName": "Build",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101446834851-s11",
+  "collectedAt": "2026-09-06T08:11:19.539Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "integration-tests/target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-integration-test-virtual-threads-grpc",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "25.0.4.1",
+        "status": "OK",
+        "startedAt": 1788680358738,
+        "endedAt": 1788682274876,
+        "totalMs": 1917029,
+        "wallMs": 1916137,
+        "cpuMs": 93972,
+        "gcMs": 2584,
+        "gcCount": 184,
+        "jitMs": 68715,
+        "c2Ms": 68715,
+        "downloadMs": 771,
+        "downloadBytes": 688191,
+        "downloadCount": 11,
+        "moduleCount": 10,
+        "slowestMojo": {
+          "plugin": "io.quarkus:quarkus-maven-plugin",
+          "goal": "build",
+          "phase": "package",
+          "executionId": "default",
+          "moduleKey": "io.quarkus:quarkus-integration-test-virtual-threads-grpc:999-SNAPSHOT",
+          "durationMs": 208267
+        },
+        "slowestTest": {
+          "className": "io.quarkus.virtual.mail.RunOnVirtualThreadIT",
+          "methodName": "testScheduledMethodsUsingApi",
+          "displayName": "testScheduledMethodsUsingApi()",
+          "framework": "JUNIT5",
+          "durationMs": 5042
+        },
+        "testCount": 10,
+        "testMs": 31115,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 16766414848,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 2486520
+    }
+  ]
+}

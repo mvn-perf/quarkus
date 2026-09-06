@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 34017409503,
+  "runNumber": 16,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "gradle-tests",
+  "jobId": 101446834926,
+  "jobName": "Gradle Tests - JDK 25",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/34017409503/job/101446834926",
+  "runnerName": "GitHub Actions 1000002156",
+  "stepNumber": 12,
+  "stepName": "Build",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101446834926-s12",
+  "collectedAt": "2026-09-06T08:51:18.265Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-integration-test-gradle-plugin",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "25.0.4.1",
+        "status": "OK",
+        "startedAt": 1788682791556,
+        "endedAt": 1788684674125,
+        "totalMs": 1882755,
+        "wallMs": 1882569,
+        "cpuMs": 29010,
+        "gcMs": 1410,
+        "gcCount": 99,
+        "jitMs": 16238,
+        "c2Ms": 16238,
+        "downloadMs": 536,
+        "downloadBytes": 688191,
+        "downloadCount": 11,
+        "moduleCount": 1,
+        "slowestMojo": {
+          "plugin": "org.apache.maven.plugins:maven-surefire-plugin",
+          "goal": "test",
+          "phase": "test",
+          "executionId": "default-test",
+          "moduleKey": "io.quarkus:quarkus-integration-test-gradle-plugin:999-SNAPSHOT",
+          "durationMs": 1862967
+        },
+        "slowestTest": {
+          "className": "io.quarkus.gradle.JibAotTest",
+          "methodName": "shouldRunIntegrationTestAsPartOfBuild",
+          "displayName": "shouldRunIntegrationTestAsPartOfBuild()",
+          "framework": "JUNIT5",
+          "durationMs": 47885
+        },
+        "testCount": 10,
+        "testMs": 292488,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 16766414848,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 2421762
+    }
+  ]
+}

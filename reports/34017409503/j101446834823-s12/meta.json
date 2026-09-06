@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 34017409503,
+  "runNumber": 16,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "gradle-tests",
+  "jobId": 101446834823,
+  "jobName": "Gradle Tests - JDK 21 Windows",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/34017409503/job/101446834823",
+  "runnerName": "GitHub Actions 1000002109",
+  "stepNumber": 12,
+  "stepName": "Build",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101446834823-s12",
+  "collectedAt": "2026-09-06T08:37:45.312Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-integration-test-gradle-plugin",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "21.0.12.1",
+        "status": "OK",
+        "startedAt": 1788679789837,
+        "endedAt": 1788683853570,
+        "totalMs": 4064536,
+        "wallMs": 4063733,
+        "cpuMs": 109603,
+        "gcMs": 13,
+        "gcCount": 120,
+        "jitMs": 41673,
+        "c2Ms": 41673,
+        "downloadMs": 1161371,
+        "downloadBytes": 223905156,
+        "downloadCount": 1291,
+        "moduleCount": 1,
+        "slowestMojo": {
+          "plugin": "org.apache.maven.plugins:maven-surefire-plugin",
+          "goal": "test",
+          "phase": "test",
+          "executionId": "default-test",
+          "moduleKey": "io.quarkus:quarkus-integration-test-gradle-plugin:999-SNAPSHOT",
+          "durationMs": 3996028
+        },
+        "slowestTest": {
+          "className": "io.quarkus.gradle.GrpcMultiModuleQuarkusBuildTest",
+          "methodName": "testGrpcMultiModuleBuild",
+          "displayName": "testGrpcMultiModuleBuild()",
+          "framework": "JUNIT5",
+          "durationMs": 79321
+        },
+        "testCount": 10,
+        "testMs": 498800,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 17174360064,
+          "osName": "Windows Server 2025 , 64 bit Build 26100 (10.0.26100.33296)",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 3473497
+    }
+  ]
+}

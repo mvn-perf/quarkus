@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 34017409503,
+  "runNumber": 16,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "jvm-tests",
+  "jobId": 101446834868,
+  "jobName": "JVM Tests - JDK 21 Windows",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/34017409503/job/101446834868",
+  "runnerName": "GitHub Actions 1000002119",
+  "stepNumber": 19,
+  "stepName": "Build",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101446834868-s19",
+  "collectedAt": "2026-09-06T09:19:31.520Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-parent",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "21.0.12.1",
+        "status": "FAILED",
+        "startedAt": 1788680631156,
+        "endedAt": 1788686351404,
+        "totalMs": 5721228,
+        "wallMs": 5720248,
+        "cpuMs": 1243057,
+        "gcMs": 39,
+        "gcCount": 3024,
+        "jitMs": 959017,
+        "c2Ms": 958917,
+        "downloadMs": 843980,
+        "downloadBytes": 1608383672,
+        "downloadCount": 4283,
+        "moduleCount": 881,
+        "slowestMojo": {
+          "plugin": "org.apache.maven.plugins:maven-surefire-plugin",
+          "goal": "test",
+          "phase": "test",
+          "executionId": "default-test",
+          "moduleKey": "io.quarkus:quarkus-vertx-http-deployment:999-SNAPSHOT",
+          "durationMs": 1206845
+        },
+        "slowestTest": {
+          "className": "io.quarkus.vertx.mdc.VertxMDCDevModeTest",
+          "methodName": "mdcDevMode",
+          "displayName": "mdcDevMode()",
+          "framework": "JUNIT5",
+          "durationMs": 6995
+        },
+        "testCount": 11,
+        "testMs": 38281,
+        "issueCount": 1,
+        "issueSeverities": {
+          "error": 1
+        },
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 17174360064,
+          "osName": "Windows Server 2025 , 64 bit Build 26100 (10.0.26100.33296)",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 7070729
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 34017409503,
+  "runNumber": 16,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "maven-tests",
+  "jobId": 101446834848,
+  "jobName": "Maven Tests - JDK 25",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/34017409503/job/101446834848",
+  "runnerName": "GitHub Actions 1000002128",
+  "stepNumber": 12,
+  "stepName": "Build",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101446834848-s12",
+  "collectedAt": "2026-09-06T08:56:26.854Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-integration-test-maven",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "25.0.4.1",
+        "status": "OK",
+        "startedAt": 1788681159649,
+        "endedAt": 1788684979596,
+        "totalMs": 3821029,
+        "wallMs": 3819947,
+        "cpuMs": 396323,
+        "gcMs": 21714,
+        "gcCount": 646,
+        "jitMs": 264886,
+        "c2Ms": 264547,
+        "downloadMs": 67069,
+        "downloadBytes": 318104815,
+        "downloadCount": 730,
+        "moduleCount": 2,
+        "slowestMojo": {
+          "plugin": "org.apache.maven.plugins:maven-failsafe-plugin",
+          "goal": "integration-test",
+          "phase": "integration-test",
+          "executionId": "default",
+          "moduleKey": "io.quarkus:quarkus-integration-test-maven:999-SNAPSHOT",
+          "durationMs": 3227155
+        },
+        "slowestTest": {
+          "className": "io.quarkus.maven.it.BuildIT",
+          "methodName": "testMultiBuildMode",
+          "displayName": "testMultiBuildMode()",
+          "framework": "JUNIT5",
+          "durationMs": 72138
+        },
+        "testCount": 10,
+        "testMs": 400850,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 16766414848,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 3453328
+    }
+  ]
+}

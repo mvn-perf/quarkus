@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 34017409503,
+  "runNumber": 16,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "native-tests",
+  "jobId": 101446835103,
+  "jobName": "Native Tests - Build tools and DevTools",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/34017409503/job/101446835103",
+  "runnerName": "GitHub Actions 1000002166",
+  "stepNumber": 18,
+  "stepName": "Build",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101446835103-s18",
+  "collectedAt": "2026-09-06T09:28:38.686Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "integration-tests/target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-integration-test-compose-devservices",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "25.0.4.1",
+        "status": "OK",
+        "startedAt": 1788684067663,
+        "endedAt": 1788686912725,
+        "totalMs": 2845901,
+        "wallMs": 2845062,
+        "cpuMs": 61430,
+        "gcMs": 1559,
+        "gcCount": 170,
+        "jitMs": 44887,
+        "c2Ms": 44887,
+        "downloadMs": 708,
+        "downloadBytes": 688191,
+        "downloadCount": 11,
+        "moduleCount": 4,
+        "slowestMojo": {
+          "plugin": "org.apache.maven.plugins:maven-failsafe-plugin",
+          "goal": "integration-test",
+          "phase": "integration-test",
+          "executionId": "default",
+          "moduleKey": "io.quarkus:quarkus-integration-test-gradle-plugin:999-SNAPSHOT",
+          "durationMs": 1180232
+        },
+        "slowestTest": {
+          "className": "io.quarkus.maven.it.NativeAgentIT",
+          "methodName": "testRunIntegrationTests",
+          "displayName": "testRunIntegrationTests()",
+          "framework": "JUNIT5",
+          "durationMs": 260300
+        },
+        "testCount": 10,
+        "testMs": 1826038,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 16766414848,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 2668908
+    }
+  ]
+}

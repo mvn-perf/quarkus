@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 34017409503,
+  "runNumber": 16,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "native-tests",
+  "jobId": 101446835161,
+  "jobName": "Native Tests - Windows support",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/34017409503/job/101446835161",
+  "runnerName": "GitHub Actions 1000002137",
+  "stepNumber": 18,
+  "stepName": "Build",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101446835161-s18",
+  "collectedAt": "2026-09-06T08:17:59.799Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "integration-tests/target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-integration-test-liquibase",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "25.0.4.1",
+        "status": "OK",
+        "startedAt": 1788681811825,
+        "endedAt": 1788682674987,
+        "totalMs": 863504,
+        "wallMs": 863162,
+        "cpuMs": 68297,
+        "gcMs": 0,
+        "gcCount": 147,
+        "jitMs": 69544,
+        "c2Ms": 69544,
+        "downloadMs": 554134,
+        "downloadBytes": 192244537,
+        "downloadCount": 1057,
+        "moduleCount": 3,
+        "slowestMojo": {
+          "plugin": "io.quarkus:quarkus-maven-plugin",
+          "goal": "build",
+          "phase": "package",
+          "executionId": "default",
+          "moduleKey": "io.quarkus:quarkus-integration-test-qute:999-SNAPSHOT",
+          "durationMs": 266328
+        },
+        "slowestTest": {
+          "className": "io.quarkus.it.liquibase.LiquibaseFunctionalityNativeIT",
+          "methodName": "testLiquibaseQuarkusFunctionality",
+          "displayName": "Migrates a schema correctly using integrated instance",
+          "framework": "JUNIT5",
+          "durationMs": 2096
+        },
+        "testCount": 10,
+        "testMs": 7375,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 17174360064,
+          "osName": "Windows Server 2025 , 64 bit Build 26100 (10.0.26100.33296)",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 1879966
+    }
+  ]
+}

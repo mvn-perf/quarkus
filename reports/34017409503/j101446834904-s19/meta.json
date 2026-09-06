@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 34017409503,
+  "runNumber": 16,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "jvm-tests",
+  "jobId": 101446834904,
+  "jobName": "JVM Integration Tests - JDK 21",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/34017409503/job/101446834904",
+  "runnerName": "GitHub Actions 1000002134",
+  "stepNumber": 19,
+  "stepName": "Build",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101446834904-s19",
+  "collectedAt": "2026-09-06T10:53:03.816Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "integration-tests/target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-integration-tests-parent",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "21.0.12.1",
+        "status": "OK",
+        "startedAt": 1788681751901,
+        "endedAt": 1788691951304,
+        "totalMs": 10200093,
+        "wallMs": 10199403,
+        "cpuMs": 4640590,
+        "gcMs": 143266,
+        "gcCount": 9967,
+        "jitMs": 3565343,
+        "c2Ms": 3561263,
+        "downloadMs": 10437,
+        "downloadBytes": 69519850,
+        "downloadCount": 75,
+        "moduleCount": 364,
+        "slowestMojo": {
+          "plugin": "org.apache.maven.plugins:maven-surefire-plugin",
+          "goal": "test",
+          "phase": "test",
+          "executionId": "default-test",
+          "moduleKey": "io.quarkus:quarkus-integration-test-opentelemetry-vertx-exporter:999-SNAPSHOT",
+          "durationMs": 297147
+        },
+        "slowestTest": {
+          "className": "io.quarkus.kotlin.maven.it.KotlinRemoteDevModeIT",
+          "methodName": "testThatTheApplicationIsReloadedOnKotlinChange",
+          "displayName": "testThatTheApplicationIsReloadedOnKotlinChange()",
+          "framework": "JUNIT5",
+          "durationMs": 44861
+        },
+        "testCount": 10,
+        "testMs": 302064,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 16770748416,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 28070048
+    }
+  ]
+}

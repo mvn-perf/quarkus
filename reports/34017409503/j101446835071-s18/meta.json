@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 34017409503,
+  "runNumber": 16,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "native-tests",
+  "jobId": 101446835071,
+  "jobName": "Native Tests - Data5",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/34017409503/job/101446835071",
+  "runnerName": "GitHub Actions 1000002182",
+  "stepNumber": 18,
+  "stepName": "Build",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101446835071-s18",
+  "collectedAt": "2026-09-06T09:41:15.602Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "integration-tests/target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-integration-test-agroal",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "25.0.4.1",
+        "status": "OK",
+        "startedAt": 1788685584010,
+        "endedAt": 1788687669449,
+        "totalMs": 2086293,
+        "wallMs": 2085439,
+        "cpuMs": 124653,
+        "gcMs": 4155,
+        "gcCount": 363,
+        "jitMs": 89692,
+        "c2Ms": 89692,
+        "downloadMs": 1256,
+        "downloadBytes": 688191,
+        "downloadCount": 11,
+        "moduleCount": 11,
+        "slowestMojo": {
+          "plugin": "io.quarkus:quarkus-maven-plugin",
+          "goal": "build",
+          "phase": "package",
+          "executionId": "default",
+          "moduleKey": "io.quarkus:quarkus-integration-test-jpa-postgresql-withxml:999-SNAPSHOT",
+          "durationMs": 207213
+        },
+        "slowestTest": {
+          "className": "io.quarkus.it.reactive.pg.client.HealthCheckIT",
+          "methodName": "testHealthCheck",
+          "displayName": "testHealthCheck()",
+          "framework": "JUNIT5",
+          "durationMs": 1428
+        },
+        "testCount": 10,
+        "testMs": 10632,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 2,
+          "cpuThreads": 4,
+          "memoryBytes": 16765374464,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 2754779
+    }
+  ]
+}

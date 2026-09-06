@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 34017409503,
+  "runNumber": 16,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "jvm-tests",
+  "jobId": 101446834892,
+  "jobName": "JVM Integration Tests - JDK 25",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/34017409503/job/101446834892",
+  "runnerName": "GitHub Actions 1000002159",
+  "stepNumber": 19,
+  "stepName": "Build",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101446834892-s19",
+  "collectedAt": "2026-09-06T10:56:04.179Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "integration-tests/target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-integration-tests-parent",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "25.0.4.1",
+        "status": "OK",
+        "startedAt": 1788683201249,
+        "endedAt": 1788692127629,
+        "totalMs": 8927653,
+        "wallMs": 8926380,
+        "cpuMs": 3468004,
+        "gcMs": 150761,
+        "gcCount": 9434,
+        "jitMs": 2057079,
+        "c2Ms": 2048144,
+        "downloadMs": 19854,
+        "downloadBytes": 69519850,
+        "downloadCount": 75,
+        "moduleCount": 364,
+        "slowestMojo": {
+          "plugin": "org.apache.maven.plugins:maven-invoker-plugin",
+          "goal": "run",
+          "phase": "integration-test",
+          "executionId": "integration-tests",
+          "moduleKey": "io.quarkus:quarkus-integration-test-container-image-invoker:999-SNAPSHOT",
+          "durationMs": 286992
+        },
+        "slowestTest": {
+          "className": "io.quarkus.it.jpa.postgresql.DevServicesPostgresqlContainerNoReuseTest",
+          "methodName": "testContainerNotReusedWithDefaultSettings",
+          "displayName": "testContainerNotReusedWithDefaultSettings()",
+          "framework": "JUNIT5",
+          "durationMs": 38112
+        },
+        "testCount": 10,
+        "testMs": 255349,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 2,
+          "cpuThreads": 4,
+          "memoryBytes": 16765378560,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 28629271
+    }
+  ]
+}

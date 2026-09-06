@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 34017409503,
+  "runNumber": 16,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "kubernetes-tests",
+  "jobId": 101446834834,
+  "jobName": "Kubernetes Tests - JDK 25",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/34017409503/job/101446834834",
+  "runnerName": "GitHub Actions 1000002127",
+  "stepNumber": 11,
+  "stepName": "Build",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101446834834-s11",
+  "collectedAt": "2026-09-06T08:10:45.677Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "integration-tests/kubernetes/target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-integration-test-kubernetes-parent",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "25.0.4.1",
+        "status": "OK",
+        "startedAt": 1788681098579,
+        "endedAt": 1788682240834,
+        "totalMs": 1142887,
+        "wallMs": 1142254,
+        "cpuMs": 488911,
+        "gcMs": 35277,
+        "gcCount": 878,
+        "jitMs": 276060,
+        "c2Ms": 273214,
+        "downloadMs": 577,
+        "downloadBytes": 688191,
+        "downloadCount": 11,
+        "moduleCount": 4,
+        "slowestMojo": {
+          "plugin": "org.apache.maven.plugins:maven-surefire-plugin",
+          "goal": "test",
+          "phase": "test",
+          "executionId": "default-test",
+          "moduleKey": "io.quarkus:quarkus-integration-test-kubernetes-standard:999-SNAPSHOT",
+          "durationMs": 666368
+        },
+        "slowestTest": {
+          "className": "io.quarkus.it.kubernetes.WithKubernetesClientTest",
+          "methodName": "assertApplicationRuns",
+          "displayName": "assertApplicationRuns()",
+          "framework": "JUNIT5",
+          "durationMs": 1189
+        },
+        "testCount": 10,
+        "testMs": 5145,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 16770748416,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 2213448
+    }
+  ]
+}

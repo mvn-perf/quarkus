@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/quarkus",
+  "serverUrl": "https://github.com",
+  "runId": 34017409503,
+  "runNumber": 16,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/quarkus/.github/workflows/ci-actions-incremental.yml@refs/heads/ci/build-monitor",
+  "jobKey": "native-tests",
+  "jobId": 101446835114,
+  "jobName": "Native Tests - Security1",
+  "jobUrl": "https://github.com/mvn-perf/quarkus/actions/runs/34017409503/job/101446835114",
+  "runnerName": "GitHub Actions 1000002154",
+  "stepNumber": 18,
+  "stepName": "Build",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101446835114-s18",
+  "collectedAt": "2026-09-06T08:36:31.706Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "integration-tests/target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "io.quarkus",
+        "artifactId": "quarkus-integration-test-bouncycastle",
+        "version": "999-SNAPSHOT",
+        "goals": [
+          "clean",
+          "install"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "25.0.4.1",
+        "status": "OK",
+        "startedAt": 1788682689663,
+        "endedAt": 1788683787684,
+        "totalMs": 1100299,
+        "wallMs": 1098020,
+        "cpuMs": 61909,
+        "gcMs": 2160,
+        "gcCount": 245,
+        "jitMs": 32692,
+        "c2Ms": 32692,
+        "downloadMs": 2029,
+        "downloadBytes": 688191,
+        "downloadCount": 11,
+        "moduleCount": 8,
+        "slowestMojo": {
+          "plugin": "io.quarkus:quarkus-maven-plugin",
+          "goal": "build",
+          "phase": "package",
+          "executionId": "default",
+          "moduleKey": "io.quarkus:quarkus-integration-test-bouncycastle:999-SNAPSHOT",
+          "durationMs": 157932
+        },
+        "slowestTest": {
+          "className": "io.quarkus.it.elytron.JCAITCase",
+          "methodName": "testDecodeRSAKey",
+          "displayName": "testDecodeRSAKey()",
+          "framework": "JUNIT5",
+          "durationMs": 2071
+        },
+        "testCount": 10,
+        "testMs": 10942,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 2,
+          "cpuThreads": 4,
+          "memoryBytes": 16765374464,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 2222205
+    }
+  ]
+}
